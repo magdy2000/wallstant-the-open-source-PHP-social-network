@@ -6,12 +6,13 @@ import {
   useCurrentFrame,
 } from "remotion";
 import { Logo } from "../components/Logo";
-import { colors, fontFamily } from "../theme";
+import { colors, fontFamily, useIsVertical } from "../theme";
 
 const ease = Easing.bezier(0.16, 1, 0.3, 1);
 
 export const IntroScene: React.FC = () => {
   const frame = useCurrentFrame();
+  const vertical = useIsVertical();
 
   return (
     <AbsoluteFill
@@ -77,9 +78,12 @@ export const IntroScene: React.FC = () => {
         name="Arabic name"
         style={{
           color: colors.ink,
-          fontSize: 92,
+          fontSize: vertical ? 104 : 92,
           fontWeight: 900,
           direction: "rtl",
+          textAlign: "center",
+          lineHeight: 1.3,
+          maxWidth: vertical ? 860 : undefined,
           opacity: interpolate(frame, [26, 44], [0, 1], {
             extrapolateLeft: "clamp",
             extrapolateRight: "clamp",
@@ -97,9 +101,11 @@ export const IntroScene: React.FC = () => {
         name="English name"
         style={{
           color: colors.muted,
-          fontSize: 44,
+          fontSize: vertical ? 34 : 44,
           fontWeight: 400,
-          letterSpacing: 10,
+          letterSpacing: vertical ? 5 : 10,
+          textAlign: "center",
+          maxWidth: vertical ? 900 : undefined,
           textTransform: "uppercase",
           marginTop: 10,
           opacity: interpolate(frame, [40, 58], [0, 1], {

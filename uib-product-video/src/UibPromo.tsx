@@ -20,10 +20,16 @@ export const UibPromo: React.FC = () => (
         <IntroScene />
       </TransitionSeries.Sequence>
       <TransitionSeries.Transition presentation={fade()} timing={timing} />
-      <TransitionSeries.Sequence name="Close-up" durationInFrames={SCENES.closeUp}>
+      <TransitionSeries.Sequence
+        name="Close-up"
+        durationInFrames={SCENES.closeUp}
+      >
         <CloseUpScene />
       </TransitionSeries.Sequence>
-      <TransitionSeries.Transition presentation={slide({ direction: "from-left" })} timing={timing} />
+      <TransitionSeries.Transition
+        presentation={slide({ direction: "from-left" })}
+        timing={timing}
+      />
       <TransitionSeries.Sequence name="System" durationInFrames={SCENES.system}>
         <SystemScene />
       </TransitionSeries.Sequence>
@@ -31,7 +37,10 @@ export const UibPromo: React.FC = () => (
       <TransitionSeries.Sequence name="Site" durationInFrames={SCENES.site}>
         <SiteScene />
       </TransitionSeries.Sequence>
-      <TransitionSeries.Transition presentation={slide({ direction: "from-left" })} timing={timing} />
+      <TransitionSeries.Transition
+        presentation={slide({ direction: "from-left" })}
+        timing={timing}
+      />
       <TransitionSeries.Sequence name="Finish" durationInFrames={SCENES.finish}>
         <FinishScene />
       </TransitionSeries.Sequence>

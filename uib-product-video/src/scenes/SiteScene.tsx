@@ -7,23 +7,24 @@ import {
 } from "remotion";
 import { Caption } from "../components/Caption";
 import { Footage } from "../components/Footage";
-import { colors, fontFamily } from "../theme";
+import { colors, fontFamily, useIsVertical } from "../theme";
 
 const features = ["عزل مائي فعّال", "متانة عالية", "سهولة في التركيب"];
 
 export const SiteScene: React.FC = () => {
   const frame = useCurrentFrame();
+  const vertical = useIsVertical();
 
   return (
     <AbsoluteFill>
-      <Footage fromSeconds={5.5} zoom={[1.04, 1.12]} />
+      <Footage fromSeconds={5.5} zoom={[1.04, 1.12]} focusX={vertical ? 0.36 : 0.42} />
       <Caption kicker="في الموقع" title="تنفيذ احترافي للمشاريع الكبرى" />
       <AbsoluteFill
         style={{
           fontFamily,
           direction: "rtl",
-          padding: "110px 140px",
-          alignItems: "flex-start",
+          padding: vertical ? "250px 90px" : "110px 140px",
+          alignItems: vertical ? "flex-end" : "flex-start",
           gap: 22,
         }}
       >
@@ -44,15 +45,25 @@ export const SiteScene: React.FC = () => {
                 color: colors.ink,
                 fontSize: 44,
                 fontWeight: 700,
-                opacity: interpolate(frame, [start, start + 14, 132, 146], [0, 1, 1, 0], {
-                  extrapolateLeft: "clamp",
-                  extrapolateRight: "clamp",
-                }),
-                translate: interpolate(frame, [start, start + 20], ["-80px 0px", "0px 0px"], {
-                  extrapolateLeft: "clamp",
-                  extrapolateRight: "clamp",
-                  easing: Easing.bezier(0.16, 1, 0.3, 1),
-                }),
+                opacity: interpolate(
+                  frame,
+                  [start, start + 14, 132, 146],
+                  [0, 1, 1, 0],
+                  {
+                    extrapolateLeft: "clamp",
+                    extrapolateRight: "clamp",
+                  },
+                ),
+                translate: interpolate(
+                  frame,
+                  [start, start + 20],
+                  ["-80px 0px", "0px 0px"],
+                  {
+                    extrapolateLeft: "clamp",
+                    extrapolateRight: "clamp",
+                    easing: Easing.bezier(0.16, 1, 0.3, 1),
+                  },
+                ),
               }}
             >
               <div

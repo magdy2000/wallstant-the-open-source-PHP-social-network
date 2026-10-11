@@ -4,7 +4,13 @@ import { Footage } from "../components/Footage";
 
 export const SystemScene: React.FC = () => (
   <AbsoluteFill>
-    <Footage fromSeconds={2.6} playbackRate={0.8} zoom={[1.06, 1.16]} origin="40% 45%" />
+    <Footage
+      fromSeconds={2.6}
+      playbackRate={0.8}
+      zoom={[1.06, 1.16]}
+      origin="40% 45%"
+      focusX={0.5}
+    />
     <Caption
       kicker="نظام عزل متكامل"
       title="اللفائف البيتومينية + برايمر D41"

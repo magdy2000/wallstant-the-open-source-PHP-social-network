@@ -4,7 +4,13 @@ import { Footage } from "../components/Footage";
 
 export const CloseUpScene: React.FC = () => (
   <AbsoluteFill>
-    <Footage fromSeconds={0} playbackRate={0.55} zoom={[1.18, 1.05]} origin="50% 40%" />
+    <Footage
+      fromSeconds={0}
+      playbackRate={0.55}
+      zoom={[1.18, 1.05]}
+      origin="50% 40%"
+      focusX={0.45}
+    />
     <Caption
       kicker="لفائف العزل المائي"
       title="جودة تبدأ من التفاصيل"

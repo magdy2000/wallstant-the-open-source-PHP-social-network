@@ -6,7 +6,7 @@ import {
   useCurrentFrame,
   useVideoConfig,
 } from "remotion";
-import { colors, fontFamily } from "../theme";
+import { colors, fontFamily, useIsVertical } from "../theme";
 
 const ease = Easing.bezier(0.16, 1, 0.3, 1);
 
@@ -20,6 +20,8 @@ export const Caption: React.FC<{
   const frame = useCurrentFrame();
   const { durationInFrames } = useVideoConfig();
   const out = durationInFrames - 18;
+  // Vertical: keep clear of the TikTok/Reels caption area and side buttons.
+  const vertical = useIsVertical();
 
   return (
     <AbsoluteFill
@@ -27,13 +29,13 @@ export const Caption: React.FC<{
         fontFamily,
         direction: "rtl",
         justifyContent: "flex-end",
-        padding: "0 140px 130px 140px",
+        padding: vertical ? "0 90px 460px 90px" : "0 140px 130px 140px",
       }}
     >
       <AbsoluteFill
         style={{
           background:
-            "linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0) 65%)",
+            "linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.45) 45%, rgba(0,0,0,0) 70%)",
         }}
       />
       <div
@@ -41,7 +43,8 @@ export const Caption: React.FC<{
           position: "relative",
           display: "flex",
           flexDirection: "column",
-          alignItems: "flex-start",
+          alignItems: vertical ? "center" : "flex-start",
+          textAlign: vertical ? "center" : "start",
           gap: 10,
           opacity: interpolate(frame, [out, out + 14], [1, 0], {
             extrapolateLeft: "clamp",
@@ -83,15 +86,20 @@ export const Caption: React.FC<{
             name="Title"
             style={{
               color: colors.ink,
-              fontSize: 104,
+              fontSize: vertical ? 88 : 104,
               fontWeight: 900,
               lineHeight: 1.25,
               textShadow: "0 6px 30px rgba(0,0,0,0.5)",
-              translate: interpolate(frame, [delay + 4, delay + 26], ["0px 140px", "0px 0px"], {
-                extrapolateLeft: "clamp",
-                extrapolateRight: "clamp",
-                easing: ease,
-              }),
+              translate: interpolate(
+                frame,
+                [delay + 4, delay + 26],
+                ["0px 140px", "0px 0px"],
+                {
+                  extrapolateLeft: "clamp",
+                  extrapolateRight: "clamp",
+                  easing: ease,
+                },
+              ),
             }}
           >
             {title}
@@ -102,17 +110,22 @@ export const Caption: React.FC<{
             name="Subtitle"
             style={{
               color: colors.muted,
-              fontSize: 48,
+              fontSize: vertical ? 46 : 48,
               fontWeight: 400,
               opacity: interpolate(frame, [delay + 18, delay + 34], [0, 1], {
                 extrapolateLeft: "clamp",
                 extrapolateRight: "clamp",
               }),
-              translate: interpolate(frame, [delay + 18, delay + 34], ["0px 20px", "0px 0px"], {
-                extrapolateLeft: "clamp",
-                extrapolateRight: "clamp",
-                easing: ease,
-              }),
+              translate: interpolate(
+                frame,
+                [delay + 18, delay + 34],
+                ["0px 20px", "0px 0px"],
+                {
+                  extrapolateLeft: "clamp",
+                  extrapolateRight: "clamp",
+                  easing: ease,
+                },
+              ),
             }}
           >
             {subtitle}

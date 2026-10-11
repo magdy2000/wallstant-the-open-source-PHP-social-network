@@ -7,12 +7,13 @@ import {
 } from "remotion";
 import { Footage } from "../components/Footage";
 import { Logo } from "../components/Logo";
-import { colors, fontFamily } from "../theme";
+import { colors, fontFamily, useIsVertical } from "../theme";
 
 const ease = Easing.bezier(0.16, 1, 0.3, 1);
 
 export const OutroScene: React.FC = () => {
   const frame = useCurrentFrame();
+  const vertical = useIsVertical();
   const fade = (s: number) =>
     interpolate(frame, [s, s + 18], [0, 1], {
       extrapolateLeft: "clamp",
@@ -22,7 +23,12 @@ export const OutroScene: React.FC = () => {
   return (
     <AbsoluteFill style={{ backgroundColor: colors.bg, fontFamily }}>
       <AbsoluteFill style={{ filter: "blur(18px)", opacity: 0.35 }}>
-        <Footage fromSeconds={16} playbackRate={0.6} zoom={[1.15, 1.25]} />
+        <Footage
+          fromSeconds={16}
+          playbackRate={0.6}
+          zoom={[1.15, 1.25]}
+          focusX={0.6}
+        />
       </AbsoluteFill>
       <AbsoluteFill style={{ backgroundColor: "rgba(8,8,10,0.6)" }} />
       <AbsoluteFill style={{ justifyContent: "center", alignItems: "center" }}>
@@ -75,11 +81,12 @@ export const OutroScene: React.FC = () => {
           name="Contact"
           style={{
             display: "flex",
-            gap: 30,
+            flexDirection: vertical ? "column" : "row",
+            gap: vertical ? 14 : 30,
             alignItems: "center",
             marginTop: 50,
-            padding: "18px 44px",
-            borderRadius: 999,
+            padding: vertical ? "26px 60px" : "18px 44px",
+            borderRadius: vertical ? 48 : 999,
             border: "1px solid rgba(255,255,255,0.25)",
             backgroundColor: "rgba(255,255,255,0.06)",
             color: colors.ink,
@@ -90,7 +97,13 @@ export const OutroScene: React.FC = () => {
           }}
         >
           www.uib.com.sa
-          <div style={{ width: 2, height: 40, backgroundColor: "rgba(255,255,255,0.3)" }} />
+          <div
+            style={{
+              width: vertical ? 300 : 2,
+              height: vertical ? 2 : 40,
+              backgroundColor: "rgba(255,255,255,0.3)",
+            }}
+          />
           info@uib.com.sa
         </Interactive.Div>
       </AbsoluteFill>

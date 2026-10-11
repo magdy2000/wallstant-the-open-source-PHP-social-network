@@ -1,5 +1,5 @@
 import { loadFont } from "@remotion/fonts";
-import { staticFile } from "remotion";
+import { staticFile, useVideoConfig } from "remotion";
 
 // Cairo (SIL OFL) bundled locally in public/fonts so rendering works offline.
 export const fontFamily = "Cairo";
@@ -31,6 +31,12 @@ export const colors = {
 };
 
 export const FPS = 30;
+
+// True for the 9:16 (Instagram / TikTok) composition.
+export const useIsVertical = () => {
+  const { width, height } = useVideoConfig();
+  return height > width;
+};
 export const TRANSITION = 15;
 
 // Scene lengths in frames (30 fps)

@@ -9,17 +9,59 @@ import { FPS, SCENES, TOTAL_FRAMES } from "./theme";
 import { UibPromo } from "./UibPromo";
 
 const size = { fps: FPS, width: 1920, height: 1080 };
+const vertical = { fps: FPS, width: 1080, height: 1920 };
 
 export const RemotionRoot: React.FC = () => (
   <>
-    <Composition id="UibPromo" component={UibPromo} durationInFrames={TOTAL_FRAMES} {...size} />
+    <Composition
+      id="UibPromo"
+      component={UibPromo}
+      durationInFrames={TOTAL_FRAMES}
+      {...size}
+    />
+    <Composition
+      id="UibPromoVertical"
+      component={UibPromo}
+      durationInFrames={TOTAL_FRAMES}
+      {...vertical}
+    />
     <Folder name="Scenes">
-      <Composition id="Intro" component={IntroScene} durationInFrames={SCENES.intro} {...size} />
-      <Composition id="CloseUp" component={CloseUpScene} durationInFrames={SCENES.closeUp} {...size} />
-      <Composition id="System" component={SystemScene} durationInFrames={SCENES.system} {...size} />
-      <Composition id="Site" component={SiteScene} durationInFrames={SCENES.site} {...size} />
-      <Composition id="Finish" component={FinishScene} durationInFrames={SCENES.finish} {...size} />
-      <Composition id="Outro" component={OutroScene} durationInFrames={SCENES.outro} {...size} />
+      <Composition
+        id="Intro"
+        component={IntroScene}
+        durationInFrames={SCENES.intro}
+        {...size}
+      />
+      <Composition
+        id="CloseUp"
+        component={CloseUpScene}
+        durationInFrames={SCENES.closeUp}
+        {...size}
+      />
+      <Composition
+        id="System"
+        component={SystemScene}
+        durationInFrames={SCENES.system}
+        {...size}
+      />
+      <Composition
+        id="Site"
+        component={SiteScene}
+        durationInFrames={SCENES.site}
+        {...size}
+      />
+      <Composition
+        id="Finish"
+        component={FinishScene}
+        durationInFrames={SCENES.finish}
+        {...size}
+      />
+      <Composition
+        id="Outro"
+        component={OutroScene}
+        durationInFrames={SCENES.outro}
+        {...size}
+      />
     </Folder>
   </>
 );
